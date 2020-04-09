@@ -61,8 +61,9 @@ if __name__ == "__main__":
     print(f'name: {ship2.name}\n'\
         f'health: {ship2.health}\n')
     
-    # print('\n--TEST 5--\n')
+    print('\n--TEST 5--\n')
 
-    # ship2.take_damage(4)
-    # print(f'health: {ship2.health}\n'\
-    #     f'destroyed: {ship2.destroyed}'
+    ship2.take_damage(4)
+    print(f'name: {ship2.name}\n'\
+        f'health: {ship2.health}\n'\
+        f'destroyed: {ship2.destroyed}')

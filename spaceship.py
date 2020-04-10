@@ -20,11 +20,16 @@ class Spaceship:
         return self._destroyed
 
     def take_damage(self, damage):
+        if self.destroyed:
+            print(f'{self.name} already destroyed')
+            return
         if damage <= 0:
             print("Invalid damage value, must be 1 or above")
             return
         
         self.health -= damage
+        if self.destroyed:
+            print(f'{self.name} destroyed!')
 
     def shot_landed(self):  # TODO: (Potentially) Add accuracy value to shots
         
@@ -48,9 +53,19 @@ class Spaceship:
         if self.dodge == 0:
             return True
 
+    # TODO: Shield functionality -> block shots & absorb damage
+    # TODO: Fire at other ships
+
+# TODO: Weapon class
+# TODO: Shield class
             
 ## Local run command ##
 if __name__ == "__main__":
+
+    # TODO: Test driven development -> test suites etc
+    # TODO: Proper evnnt logging
+    # TODO: Function for printing ship variable information for testing / debugging purposes 
+
     print(f'\n--{__file__} tests--\n')
     
     print('\n--TEST 1--\n')

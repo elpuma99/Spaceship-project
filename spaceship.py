@@ -6,9 +6,9 @@ import random
 class Spaceship:
     
     def __init__(self, name, max_health, dodge=None):
-        self.name = name # Printed name of ship
-        self.max_health = max_health # Max health of ship
-        self.health = self.max_health # Initialising current health of ship
+        self.name = name # Printed name
+        self.max_health = max_health # Max health
+        self.health = self.max_health # Initialising current health
         self.dodge = dodge # Chance of ships dodging shots in % out of 100
         self._destroyed = False # Ship is not destroyed, as health is above 0
 
@@ -19,7 +19,9 @@ class Spaceship:
 
         return self._destroyed
 
-    def take_damage(self, damage):
+    def take_damage(self, damage): 
+        # Called when damage is done to the ship health
+        
         if self.destroyed:
             print(f'{self.name} already destroyed')
             return
@@ -28,12 +30,17 @@ class Spaceship:
             return
         
         self.health -= damage
+        print(f'{self.name} took 1 point of damage!')
         if self.destroyed:
             print(f'{self.name} destroyed!')
 
     def shot_landed(self):  # TODO: (Potentially) Add accuracy value to shots
         
         # Returns true or false if ship has dodged an incoming attack
+
+        if self.destroyed:
+            print(f'{self.name} already destroyed')
+            return
         
         if self.dodge < 0 or self.dodge > 100:
             print('Invalid value for dodge, must be between 0 and 100')
@@ -53,18 +60,39 @@ class Spaceship:
         if self.dodge == 0:
             return True
 
-    # TODO: Shield functionality -> block shots & absorb damage
-    # TODO: Fire at other ships
+    
+    def shot(self, damage=1): 
+        # Ship is fired at, this method will be called per every shot
 
-# TODO: Weapon class
+        if self.destroyed:
+            print(f'{self.name} already destroyed')
+            return
+        
+        # Calculate if ship dodges, if false ship takes damage, else ship dodges shot
+        if not self.shot_landed():
+            print(f'{self.name} dodged shot!')
+            return
+        print(f'{self.name} shot lands!')
+        self.take_damage(damage)
+
+    # TODO: Shield functionality -> block shots & absorb damage
+    
+    def fire_weapons(self, target):
+        # Method to fire all weapons at enemy ship
+        return NotImplemented
+    
+    # TODO: Fire at other ships
+    # TODO: Fire individual weapons
+
 # TODO: Shield class
+# TODO: Weapon class
             
 ## Local run command ##
 if __name__ == "__main__":
 
-    # TODO: Test driven development -> test suites etc
-    # TODO: Proper evnnt logging
     # TODO: Function for printing ship variable information for testing / debugging purposes 
+    # TODO: Proper evnnt logging
+    # TODO: Test driven development -> test suites etc
 
     print(f'\n--{__file__} tests--\n')
     
@@ -144,3 +172,19 @@ if __name__ == "__main__":
         f'dodge: {ship3.dodge}\n')
     print(f'shot landed: {ship3.shot_landed()}')
     print()
+
+    print('\n--TEST 4--\n')
+
+    ship4 = Spaceship('ship4', 2, 0)
+    
+    ship4.dodge = 50
+    print(f'name: {ship4.name}\n'\
+        f'dodge: {ship4.dodge}')
+    print()
+    
+    ship4.shot()
+    ship4.shot()
+    ship4.shot()
+    ship4.shot()
+    ship4.shot()
+    print(ship4.health)

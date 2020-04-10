@@ -123,3 +123,9 @@ if __name__ == "__main__":
         f'dodge: {ship3.dodge}\n')
     print(f'shot landed: {ship3.shot_landed()}')
     print()
+
+    ship3.dodge = 50
+    print(f'name: {ship3.name}\n'\
+        f'dodge: {ship3.dodge}\n')
+    print(f'shot landed: {ship3.shot_landed()}')
+    print()

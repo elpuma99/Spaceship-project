@@ -44,23 +44,16 @@ class Spaceship:
         
         if self.dodge < 0 or self.dodge > 100:
             print('Invalid value for dodge, must be between 0 and 100')
-            return None
+            return
 
-        if self.dodge > 0 and self.dodge < 100:
-            shot_landed_random_int = random.randint(0, 100)
+        if self.dodge >= 0 and self.dodge <= 100:
+            shot_landed_random_int = random.randint(0, 99)
             
-            if self.dodge >= shot_landed_random_int:
+            if self.dodge > shot_landed_random_int:
                 return False
             
             return True
 
-        if self.dodge == 100:
-            return False
-        
-        if self.dodge == 0:
-            return True
-
-    
     def shot(self, damage=1): 
         # Ship is fired at, this method will be called per every shot
 
@@ -77,15 +70,15 @@ class Spaceship:
 
     # TODO: Shield functionality -> block shots & absorb damage
     
-    def fire_weapons(self, target):
+    def fire_weapons(self, target, damage=1):
         # Method to fire all weapons at enemy ship
 
-        if target.destroyed == True:
+        if target.destroyed:
             print(f'Target {target.name} is already destroyed')
             return
 
         print(f'{self.name} fires at {target.name}!')
-        target.shot()
+        target.shot(damage)
 
         # return NotImplemented
     
@@ -102,107 +95,107 @@ if __name__ == "__main__":
     # TODO: Proper evnnt logging
     # TODO: Test driven development -> test suites etc
 
-    print(f'\n--{__file__} tests--\n')
+    print(f'\n--{__file__}--\n')
     
-    print('\n--TEST 1--\n')
+    # print('\n--TEST 1--\n')
 
-    spaceship1 = Spaceship('spaceship1', 5)
-    print(f'name: {spaceship1.name}\n'\
-            f'max health: {spaceship1.max_health}\n'\
-            f'health: {spaceship1.health}\n'\
-            f'destroyed: {spaceship1.destroyed}')
+    # spaceship1 = Spaceship('spaceship1', 5)
+    # print(f'name: {spaceship1.name}\n'\
+    #         f'max health: {spaceship1.max_health}\n'\
+    #         f'health: {spaceship1.health}\n'\
+    #         f'destroyed: {spaceship1.destroyed}')
 
-    spaceship1.health = 0
-    print(f'name: {spaceship1.name}\n'\
-        f'health: {spaceship1.health}\n'\
-        f'destroyed: {spaceship1.destroyed}')
+    # spaceship1.health = 0
+    # print(f'name: {spaceship1.name}\n'\
+    #     f'health: {spaceship1.health}\n'\
+    #     f'destroyed: {spaceship1.destroyed}')
 
-    print('\n--TEST 2--\n')
+    # print('\n--TEST 2--\n')
 
-    ship2 = Spaceship('ship2', 5)
+    # ship2 = Spaceship('ship2', 5)
 
-    ship2.take_damage(0)
-    print(f'name: {ship2.name}\n'\
-        f'health: {ship2.health}\n')
+    # ship2.take_damage(0)
+    # print(f'name: {ship2.name}\n'\
+    #     f'health: {ship2.health}\n')
 
-    ship2.take_damage(1)
-    print(f'name: {ship2.name}\n'\
-        f'health: {ship2.health}\n')
+    # ship2.take_damage(1)
+    # print(f'name: {ship2.name}\n'\
+    #     f'health: {ship2.health}\n')
 
-    ship2.take_damage(4)
-    print(f'name: {ship2.name}\n'\
-        f'health: {ship2.health}\n'\
-        f'destroyed: {ship2.destroyed}\n'\
-        f'health: {ship2.health}')
+    # ship2.take_damage(4)
+    # print(f'name: {ship2.name}\n'\
+    #     f'health: {ship2.health}\n'\
+    #     f'destroyed: {ship2.destroyed}\n'\
+    #     f'health: {ship2.health}')
     
-    print('\n--TEST 3--\n')
+    # print('\n--TEST 3--\n')
 
-    ship3 = Spaceship('ship3', 1)
+    # ship3 = Spaceship('ship3', 1)
     
-    ship3.dodge = 0
-    print(f'name: {ship3.name}\n'\
-        f'dodge: {ship3.dodge}')
-    print(f'shot landed: {ship3.shot_landed()}')
-    print()
+    # ship3.dodge = 0
+    # print(f'name: {ship3.name}\n'\
+    #     f'dodge: {ship3.dodge}')
+    # print(f'shot landed: {ship3.shot_landed()}')
+    # print()
 
-    ship3.dodge = 100
-    print(f'name: {ship3.name}\n'\
-        f'dodge: {ship3.dodge}')
-    print(f'shot landed: {ship3.shot_landed()}')
-    print()
+    # ship3.dodge = 100
+    # print(f'name: {ship3.name}\n'\
+    #     f'dodge: {ship3.dodge}')
+    # print(f'shot landed: {ship3.shot_landed()}')
+    # print()
 
-    ship3.dodge = -1
-    print(f'name: {ship3.name}\n'\
-        f'dodge: {ship3.dodge}')
-    print(f'shot landed: {ship3.shot_landed()}')
-    print()
+    # ship3.dodge = -1
+    # print(f'name: {ship3.name}\n'\
+    #     f'dodge: {ship3.dodge}')
+    # print(f'shot landed: {ship3.shot_landed()}')
+    # print()
     
-    ship3.dodge = 101
-    print(f'name: {ship3.name}\n'\
-        f'dodge: {ship3.dodge}\n')
-    print(f'shot landed: {ship3.shot_landed()}')
-    print()
+    # ship3.dodge = 101
+    # print(f'name: {ship3.name}\n'\
+    #     f'dodge: {ship3.dodge}\n')
+    # print(f'shot landed: {ship3.shot_landed()}')
+    # print()
 
-    ship3.dodge = 99
-    print(f'name: {ship3.name}\n'\
-        f'dodge: {ship3.dodge}\n')
-    print(f'shot landed: {ship3.shot_landed()}')
-    print()
+    # ship3.dodge = 99
+    # print(f'name: {ship3.name}\n'\
+    #     f'dodge: {ship3.dodge}\n')
+    # print(f'shot landed: {ship3.shot_landed()}')
+    # print()
 
-    ship3.dodge = 1
-    print(f'name: {ship3.name}\n'\
-        f'dodge: {ship3.dodge}\n')
-    print(f'shot landed: {ship3.shot_landed()}')
-    print()
+    # ship3.dodge = 1
+    # print(f'name: {ship3.name}\n'\
+    #     f'dodge: {ship3.dodge}\n')
+    # print(f'shot landed: {ship3.shot_landed()}')
+    # print()
 
-    ship3.dodge = 50
-    print(f'name: {ship3.name}\n'\
-        f'dodge: {ship3.dodge}\n')
-    print(f'shot landed: {ship3.shot_landed()}')
-    print()
+    # ship3.dodge = 50
+    # print(f'name: {ship3.name}\n'\
+    #     f'dodge: {ship3.dodge}\n')
+    # print(f'shot landed: {ship3.shot_landed()}')
+    # print()
 
-    print('\n--TEST 4--\n')
+    # print('\n--TEST 4--\n')
 
-    ship4 = Spaceship('ship4', 2, 0)
+    # ship4 = Spaceship('ship4', 2, 0)
     
-    ship4.dodge = 50
-    print(f'name: {ship4.name}\n'\
-        f'dodge: {ship4.dodge}')
-    print()
+    # ship4.dodge = 50
+    # print(f'name: {ship4.name}\n'\
+    #     f'dodge: {ship4.dodge}')
+    # print()
     
-    ship4.shot()
-    ship4.shot()
-    ship4.shot()
-    ship4.shot()
-    ship4.shot()
-    print(ship4.health)
-    print()
+    # ship4.shot()
+    # ship4.shot()
+    # ship4.shot()
+    # ship4.shot()
+    # ship4.shot()
+    # print(ship4.health)
+    # print()
 
-    print('\n--TEST 5--\n')
+    # print('\n--TEST 5--\n')
 
-    target_ship = Spaceship('target-ship', 1, 100)
-    attacker_ship = Spaceship('attacker-ship', 1)
+    # target_ship = Spaceship('target-ship', 1, 100)
+    # attacker_ship = Spaceship('attacker-ship', 1)
 
-    attacker_ship.fire_weapons(target_ship)
+    # attacker_ship.fire_weapons(target_ship)
 
 

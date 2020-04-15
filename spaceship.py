@@ -5,7 +5,7 @@ import random
 
 class Spaceship:
     
-    def __init__(self, name, max_health, dodge=None):
+    def __init__(self, name, max_health=1, dodge=0):
         self.name = name # Printed name
         self.max_health = max_health # Max health
         self.health = self.max_health # Initialising current health
@@ -79,7 +79,15 @@ class Spaceship:
     
     def fire_weapons(self, target):
         # Method to fire all weapons at enemy ship
-        return NotImplemented
+
+        if target.destroyed == True:
+            print(f'Target {target.name} is already destroyed')
+            return
+
+        print(f'{self.name} fires at {target.name}!')
+        target.shot()
+
+        # return NotImplemented
     
     # TODO: Fire at other ships
     # TODO: Fire individual weapons
@@ -188,3 +196,13 @@ if __name__ == "__main__":
     ship4.shot()
     ship4.shot()
     print(ship4.health)
+    print()
+
+    print('\n--TEST 5--\n')
+
+    target_ship = Spaceship('target-ship', 1, 100)
+    attacker_ship = Spaceship('attacker-ship', 1)
+
+    attacker_ship.fire_weapons(target_ship)
+
+

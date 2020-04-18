@@ -1,5 +1,14 @@
 ## Imports ##
 import random
+import logging
+
+# Setup local logging instance
+logging.basicConfig()
+log = logging.getLogger(__name__)
+log.setLevel(logging.INFO)
+
+# TODO: Add specialised logs for each logging type
+# TODO: Create logging method for showing events
 
 ## Classes ##
 
@@ -23,27 +32,27 @@ class Spaceship:
         # Called when damage is done to the ship health
         
         if self.destroyed:
-            print(f'{self.name} already destroyed')
+            log.error(f'{self.name} already destroyed')
             return
         if damage <= 0:
-            print("Invalid damage value, must be 1 or above")
+            log.error(f"{damage} = Invalid damage value, must be 1 or above")
             return
         
         self.health -= damage
-        print(f'{self.name} took 1 point of damage!')
+        log.info(f'{self.name} took 1 point of damage!')
         if self.destroyed:
-            print(f'{self.name} destroyed!')
+            log.info(f'{self.name} destroyed!')
 
     def shot_landed(self):  # TODO: (Potentially) Add accuracy value to shots
         
         # Returns true or false if ship has dodged an incoming attack
 
         if self.destroyed:
-            print(f'{self.name} already destroyed')
+            log.info(f'{self.name} already destroyed')
             return
         
         if self.dodge < 0 or self.dodge > 100:
-            print('Invalid value for dodge, must be between 0 and 100')
+            log.error('Invalid value for dodge, must be between 0 and 100')
             return
 
         if self.dodge >= 0 and self.dodge <= 100:
@@ -58,14 +67,14 @@ class Spaceship:
         # Ship is fired at, this method will be called per every shot
 
         if self.destroyed:
-            print(f'{self.name} already destroyed')
+            log.info(f'{self.name} already destroyed')
             return
         
         # Calculate if ship dodges, if false ship takes damage, else ship dodges shot
         if not self.shot_landed():
-            print(f'{self.name} dodged shot!')
+            log.info(f'{self.name} dodged shot!')
             return
-        print(f'{self.name} shot lands!')
+        log.info(f'{self.name} shot lands!')
         self.take_damage(damage)
 
     # TODO: Shield functionality -> block shots & absorb damage
@@ -74,10 +83,10 @@ class Spaceship:
         # Method to fire all weapons at enemy ship
 
         if target.destroyed:
-            print(f'Target {target.name} is already destroyed')
+            log.info(f'Target {target.name} is already destroyed')
             return
 
-        print(f'{self.name} fires at {target.name}!')
+        log.info(f'{self.name} fires at {target.name}!')
         target.shot(damage)
 
         # return NotImplemented

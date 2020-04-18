@@ -77,3 +77,7 @@ class TestSpaceshipClass:
         attacker_ship.fire_weapons(target_ship, 2)
         assert target_ship.health == 0
         assert target_ship.destroyed
+    
+    
+# TODO: Test log output
+# TODO: Add own logging into each test to help trace each problem
